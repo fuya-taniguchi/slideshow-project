@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>スライドショー</title>
+    <style>
+        .slideshow {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .slideshow img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow">
+        <img id="slideshow-image" src="" alt="スライドショー">
+    </div>
+
+    <script>
+        const images = {{ images|tojson|safe }};
+        let currentIndex = 0;
+
+        function updateImage() {
+            const img = document.getElementById('slideshow-image');
+            img.src = '/static/images/' + images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        updateImage();
+        setInterval(updateImage, 3000);
+    </script>
+</body>
+</html>
